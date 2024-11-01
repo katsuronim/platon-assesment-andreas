@@ -36,14 +36,13 @@ class AssesmentController extends Controller
             do_besar."id" AS do_besar_id,
             komoditi."nama_komoditi" AS komoditi,
             user_karyawan."nama" AS driver,
-            customer_pks."kode" AS PKS,
             do_kecil_header."tgl_muat" AS tanggal_muat,
-            do_kecil_detail."muat" AS netto_muat,
+            SUM(do_kecil_detail."muat") AS netto_muat,
             do_kecil_header."tgl_bongkar" AS tanggal_bongkar,
-            do_kecil_detail."bongkar" AS netto_bongkar,
-            do_kecil_detail."bongkar" - do_kecil_detail."muat" AS susut,
-            do_kecil_detail."muat" * ongkos_angkut."ongkos_angkut" AS value_muat,
-            do_kecil_detail."bongkar" * ongkos_angkut."ongkos_angkut" AS value_bongkar,
+            SUM(do_kecil_detail."bongkar") AS netto_bongkar,
+            SUM(do_kecil_detail."bongkar" - do_kecil_detail."muat") AS susut,
+            SUM(do_kecil_detail."muat" * ongkos_angkut."ongkos_angkut") AS value_muat,
+            SUM(do_kecil_detail."bongkar" * ongkos_angkut."ongkos_angkut") AS value_bongkar,
             do_kecil_header."isKenaDenda"
         FROM bkm_do_kecil_header AS do_kecil_header
         LEFT JOIN bkm_do_kecil_detail AS do_kecil_detail ON do_kecil_detail."headerId" = do_kecil_header."id"
@@ -59,7 +58,23 @@ class AssesmentController extends Controller
         LEFT JOIN bkm_sites AS sites ON sites."id" = customer_pks."businessSiteId"
         WHERE do_kecil_header."status" NOT IN (\'DELETIONAPPROVAL\', \'DELETED\', \'DECLINED\', \'REJECTIONAPPROVAL\', \'REJECTED\')
         AND do_kecil_header."tgl_bongkar" >= \'2024-08-05\'
-        AND  do_kecil_header."tgl_bongkar" <= \'2024-09-05\'
+        AND do_kecil_header."tgl_bongkar" <= \'2024-09-05\'
+        GROUP BY
+            do_kecil_header."no_do_kecil",
+            do_kecil_header."id",
+            do_kecil_header."createdAt",
+            do_besar."no_do_besar",
+            do_besar."id",
+            komoditi."nama_komoditi",
+            user_karyawan."nama",
+            customer_pks."kode",
+            do_kecil_header."tgl_muat",
+            do_kecil_detail."muat",
+            do_kecil_header."tgl_bongkar",
+            do_kecil_detail."bongkar",
+            ongkos_angkut."ongkos_angkut",
+            do_kecil_header."isKenaDenda";
+
     ');
         // dd($data);
 
