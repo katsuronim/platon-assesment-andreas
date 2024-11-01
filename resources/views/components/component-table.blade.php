@@ -1,56 +1,118 @@
 @php
 use Carbon\Carbon;
 @endphp
-<h1 class="py-10 text-3xl font-thin text-center text-white">Hasil Assesment Platon</h1>
-<div class="grid grid-cols-2 px-16 mb-5 grd w-fit">
-    <h1 class="text-lg font-light text-left text-white ">Nama:</h1>
-    <h1 class="text-lg font-light text-left text-white ">Andreas Noah Jati Sesoca</h1>
-    <h1 class="text-lg font-light text-left text-white ">Email:</h1>
+
+<style>
+    body {
+        background-color: #1f2937; /* Tailwind's bg-gray-800 */
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        text-align: center;
+        padding: 2.5rem 0;
+        font-size: 2rem;
+        font-weight: 300;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0 4rem; /* Tailwind's px-16 */
+        margin-bottom: 1.25rem; /* Tailwind's mb-5 */
+    }
+    .grid h1 {
+        font-size: 1.125rem; /* Tailwind's text-lg */
+        font-weight: 300; /* Tailwind's font-light */
+        text-align: left;
+    }
+    .group a {
+        text-decoration: none;
+    }
+    .group a:hover h1 {
+        color: #3b82f6; /* Tailwind's text-blue-500 */
+    }
+    .table {
+        width: 100%;
+        margin: 0 4rem; /* Tailwind's mx-16 */
+        background-color: white;
+        border-radius: 1rem; /* Tailwind's rounded-xl */
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 1.25rem; /* Tailwind's p-5 */
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f9fafb; /* Tailwind's bg-gray-100 */
+        font-weight: 400; /* Tailwind's font-normal */
+    }
+    .border-t {
+        border-top: 2px solid #ddd;
+    }
+    .font-bold {
+        font-weight: bold;
+    }
+    .text-blue-500 {
+        color: #3b82f6; /* Tailwind's text-blue-500 */
+    }
+    .text-red-500 {
+        color: #ef4444; /* Tailwind's text-red-500 */
+    }
+    .border-b {
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+
+<h1>Hasil Assesment Platon</h1>
+<div class="grid">
+    <h1>Nama:</h1>
+    <h1>Andreas Noah Jati Sesoca</h1>
+    <h1>Email:</h1>
     <a class="group" href="mailto:rereandreas9@gmail.com?" target="_blank">
-        <h1 class="text-lg font-light text-left text-white group-hover:text-blue-500">rereandreas9@gmail.com</h1>
+        <h1>rereandreas9@gmail.com</h1>
     </a>
-    <h1 class="text-lg font-light text-left text-white ">No.Telepon:</h1>
+    <h1>No.Telepon:</h1>
     <a class="group" href="https://wa.me/6281296617031?" target="_blank">
-        <h1 class="text-lg font-light text-left text-white group-hover:text-blue-500 ">081296617031</h1>
+        <h1>081296617031</h1>
     </a>
 </div>
 <div class="flex flex-col items-center justify-center w-full mx-auto">
-    <table class="mx-16 my-5 bg-white table-fixed rounded-xl">
+    <table class="table">
         <thead>
             <tr class="border-b">
-                <th class="p-5 mx-10 border-r">No. DO Kecil</th>
-                <th class="p-5 mx-10 border-r">Tgl DO Kecil</th>
-                <th class="p-5 mx-10 border-r">Nama Sopir</th>
-                <th class="p-5 mx-10 border-r">Muat</th>
-                <th class="p-5 mx-10 border-r">Bongkar</th>
-                <th class="p-5 mx-10 border-r">Susut</th>
-                <th class="p-5 mx-10 border-r">Toleransi</th>
-                <th class="p-5 mx-10 border-r">Susut diatas Toleransi</th>
-                <th class="p-5 mx-10 border-r">Denda Susut Sopir</th>
-                <th class="p-5 mx-10 border-r">Kontribusi tdk susut</th>
-                <th class="p-5 mx-10 border-r">Kontribusi Bonus</th>
-                <th class="p-5 mx-10 border-r">Bonus antar teman</th>
-                <th class="p-5 mx-10 border-l">isKenaDenda</th>
+                <th>No. DO Kecil</th>
+                <th>Tgl DO Kecil</th>
+                <th>Nama Sopir</th>
+                <th>Muat</th>
+                <th>Bongkar</th>
+                <th>Susut</th>
+                <th>Toleransi</th>
+                <th>Susut diatas Toleransi</th>
+                <th>Denda Susut Sopir</th>
+                <th>Kontribusi tdk susut</th>
+                <th>Kontribusi Bonus</th>
+                <th>Bonus antar teman</th>
+                <th>isKenaDenda</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($data as $item)
                 <tr class="border-b">
-                    <td class="p-5 text-center">{{ $item->do_besar }}/{{ $item->do_kecil }}</td>
+                    <td>{{ $item->do_besar }}/{{ $item->do_kecil }}</td>
                     <td>{{ Carbon::parse($item->tanggal_do_kecil)->format('d-M-Y') }}</td>
-                    <td class="p-5 text-center">{{ $item->driver }}</td>
-                    <td class="p-5 text-center">{{ $item->netto_muat }}</td>
-                    <td class="p-5 text-center">{{ $item->netto_bongkar }}</td>
-                    <td class="p-5 text-center">{{ $item->susut }}</td>
-                    <td class="p-5 text-center">{{ $item->batasToleransi }}</td>
-                    <td class="p-5 text-center">{{ $item->susutToleransi }}</td>
-                    <td class="p-5 text-center">
+                    <td>{{ $item->driver }}</td>
+                    <td>{{ $item->netto_muat }}</td>
+                    <td>{{ $item->netto_bongkar }}</td>
+                    <td>{{ $item->susut }}</td>
+                    <td>{{ $item->batasToleransi }}</td>
+                    <td>{{ $item->susutToleransi }}</td>
+                    <td>
                         {{ $item->dendaSusut != 0 ? 'Rp ' . number_format($item->dendaSusut, 0, ',', '.') : '-' }}
                     </td>
-                    <td class="p-5 text-center">{{ $item->kontribusiTidakSusut != 0 ? $item->kontribusiTidakSusut : '-' }}</td>
-                    <td class="p-5 text-center">{{ $item->kontribusiBonus}}%</td>
-                    <td class="p-5 text-center">{{ $item->bonusAntarTeman }}</td>
-                    <td class="p-5 text-center">
+                    <td>{{ $item->kontribusiTidakSusut != 0 ? $item->kontribusiTidakSusut : '-' }}</td>
+                    <td>{{ $item->kontribusiBonus}}%</td>
+                    <td>
                         <span class="{{ $item->isKenaDenda ? 'text-blue-500' : 'text-red-500' }}">
                             {{ $item->isKenaDenda ? 'TRUE' : 'FALSE' }}
                         </span>
@@ -58,22 +120,22 @@ use Carbon\Carbon;
                 </tr>
             @endforeach
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">TOTAL</td>
+                <td class="font-bold">TOTAL</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">{{ $sumMuat }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumBongkar }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumSusut }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumToleransi }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumSusutAtasToleransi }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumDendaSusut }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumKontribusiTidakSusut }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumKontribusiBonus }}</td>
-                <td class="p-5 font-bold text-center">{{ $sumBonusAntarTeman }}</td>
+                <td class="font-bold">{{ $sumMuat }}</td>
+                <td class="font-bold">{{ $sumBongkar }}</td>
+                <td class="font-bold">{{ $sumSusut }}</td>
+                <td class="font-bold">{{ $sumToleransi }}</td>
+                <td class="font-bold">{{ $sumSusutAtasToleransi }}</td>
+                <td class="font-bold">{{ $sumDendaSusut }}</td>
+                <td class="font-bold">{{ $sumKontribusiTidakSusut }}</td>
+                <td class="font-bold">{{ $sumKontribusiBonus }}</td>
+                <td class="font-bold">{{ $sumBonusAntarTeman }}</td>
             </tr>
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">TOLERANSI SUSUT TOTAL 0.25%</td>
+                <td class="font-bold">TOLERANSI SUSUT TOTAL 0.25%</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">
+                <td class="font-bold">
                     @php
                         if($sumToleransi < 0){
                             $totalToleransi = $sumToleransi * -1;
@@ -85,9 +147,9 @@ use Carbon\Carbon;
                 </td>
             </tr>
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">TOTAL SUSUT DI ATAS TOLERANSI</td>
+                <td class="font-bold">TOTAL SUSUT DI ATAS TOLERANSI</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">
+                <td class="font-bold">
                     @php
                         if($sumSusutAtasToleransi < 0){
                             $totalSusutAtasToleransi = $sumSusutAtasToleransi * -1;
@@ -99,21 +161,20 @@ use Carbon\Carbon;
                 </td>
             </tr>
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">DENDA FR</td>
+                <td class="font-bold">DENDA FR</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">{{ number_format($dendaFR, 0, ',', '.') }}</td>
+                <td class="font-bold">{{ number_format($dendaFR, 0, ',', '.') }}</td>
             </tr>
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">DENDA SUSUT SOPIR</td>
+                <td class="font-bold">DENDA SUSUT SOPIR</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">{{ $sumDendaSusut }}</td>
+                <td class="font-bold">{{ $sumDendaSusut }}</td>
             </tr>
             <tr class="border-t">
-                <td class="p-5 font-bold text-center">SISA DENDA SUSUT SOPIR</td>
+                <td class="font-bold">SISA DENDA SUSUT SOPIR</td>
                 <td colspan="2"></td>
-                <td class="p-5 font-bold text-center">{{ $sisaDendaSusutSopir }}</td>
+                <td class="font-bold">{{ $sisaDendaSusutSopir }}</td>
             </tr>
         </tbody>
     </table>
 </div>
-
