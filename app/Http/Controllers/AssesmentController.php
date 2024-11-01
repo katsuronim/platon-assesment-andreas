@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class AssesmentController extends Controller
 {
     function getData(){
-        try {
-            $pdo = new \PDO("pgsql:host=aws-0-ap-southeast-1.pooler.supabase.com;port=6543;dbname=postgres", "postgres.nswplylaltjiawexhoso", "uIq63GIWn7jjZa4P");
-            dd("Connection successful!") ;
-        } catch (\PDOException $e) {
-            dd("Connection failed: " . $e->getMessage());
-        }
+        // try {
+        //     $pdo = new \PDO("pgsql:host=aws-0-ap-southeast-1.pooler.supabase.com;port=6543;dbname=postgres", "postgres.nswplylaltjiawexhoso", "uIq63GIWn7jjZa4P");
+        //     dd("Connection successful!") ;
+        // } catch (\PDOException $e) {
+        //     dd("Connection failed: " . $e->getMessage());
+        // }
 
         $sumMuat = 0;
         $sumBongkar = 0;
