@@ -15,7 +15,7 @@
         "VERCEL_PHP_VERSION": "8.1",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://platon-assesment-andreas.vercel.app/",
         "APP_KEY": "base64:oNGqJn6YO7DsQOU6VCtqceBMZEDlj0u+JosLRfQBhGg=",
         "CACHE_DRIVER": "file",
         "LOG_CHANNEL": "stack",
