@@ -12,6 +12,7 @@
     "buildCommand": "vite build",
     "outputDirectory": "public",
     "env": {
+        "VERCEL_PHP_VERSION": "8.1",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "http://localhost",
